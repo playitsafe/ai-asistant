@@ -1,8 +1,15 @@
 import { UnstructuredLoader } from 'langchain/document_loaders/fs/unstructured'
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
 import { getAbsolutePath } from './util.js'
 
-const unstructuredLoader = new UnstructuredLoader(getAbsolutePath('./data/doc.md'))
+// Feed MD file
+const mdFile = getAbsolutePath('./data/doc.md')
+const unstructuredLoader = new UnstructuredLoader(mdFile)
+const mdDoc = await unstructuredLoader.load()
 
-const doc = await unstructuredLoader.load()
+// Feed pdf file - will need `pdf-parse` pkg
+// const pdfFile = getAbsolutePath('./data/oauth2.pdf')
+// const pdfLoader = new PDFLoader(pdfFile)
+// const pdfDoc = await pdfLoader.load()
 
-console.log(doc)
+console.log(mdDoc)
