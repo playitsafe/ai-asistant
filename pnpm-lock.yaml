@@ -5,9 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@pinecone-database/pinecone':
+    specifier: ^0.1.6
+    version: 0.1.6
+  dotenv:
+    specifier: ^16.3.0
+    version: 16.3.0
   langchain:
     specifier: ^0.0.95
-    version: 0.0.95(pdf-parse@1.1.1)
+    version: 0.0.95(@pinecone-database/pinecone@0.1.6)(pdf-parse@1.1.1)
   pdf-parse:
     specifier: ^1.1.1
     version: 1.1.1
@@ -26,6 +32,15 @@ packages:
   /@fortaine/fetch-event-source@3.0.6:
     resolution: {integrity: sha512-621GAuLMvKtyZQ3IA6nlDWhV1V/7PGOTNIGLUifxt0KzM+dZIweJ6F3XvQF3QnqeNfS1N7WQ0Kil1Di/lhChEw==}
     engines: {node: '>=16.15'}
+    dev: false
+
+  /@pinecone-database/pinecone@0.1.6:
+    resolution: {integrity: sha512-tCnVc28udecthhgSBTdcMhYEW+xsR++AdZasp+ZE/AvUD1hOR2IR3edjk9m0sDxZyvXbno2KeqUbLIOZr7sCTw==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      cross-fetch: 3.1.6
+    transitivePeerDependencies:
+      - encoding
     dev: false
 
   /@types/retry@0.12.0:
@@ -112,6 +127,11 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: false
 
+  /dotenv@16.3.0:
+    resolution: {integrity: sha512-tHB+hmf8MRCkT3VVivGiG8kq9HiGTmQ3FzOKgztfpJQH1IWuZTOvKSJmHNnQPowecAmkCJhLrxdPhOr06LLqIQ==}
+    engines: {node: '>=12'}
+    dev: false
+
   /eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
     dev: false
@@ -159,7 +179,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /langchain@0.0.95(pdf-parse@1.1.1):
+  /langchain@0.0.95(@pinecone-database/pinecone@0.1.6)(pdf-parse@1.1.1):
     resolution: {integrity: sha512-UjOr1XArTTSZB4uCayKzQs69pCahHCq/CVTc66fAymCD5uKerh8AvcemPxgRpTi8tgcdhY76j//c0e06l5aFdA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -310,6 +330,7 @@ packages:
         optional: true
     dependencies:
       '@anthropic-ai/sdk': 0.4.4
+      '@pinecone-database/pinecone': 0.1.6
       ansi-styles: 5.2.0
       binary-extensions: 2.2.0
       camelcase: 6.3.0
