@@ -1,6 +1,7 @@
 import Koa from 'koa'
 import Router from 'koa-router'
 import { koaBody } from 'koa-body'
+import { chat } from '../chat.js'
 
 const app = new Koa()
 
@@ -11,12 +12,17 @@ app.use(
 )
 
 const router = new Router()
-router.get('/', ctx => {
+router.get('/', (ctx) => {
   ctx.body = 'hello server!!!!!'
 })
 
-router.post('/chat', ctx => {
+router.post('/chat', async (ctx) => {
   const { message } = ctx.request.body
+  const res = await chat(message)
+  ctx.body = {
+    data: res,
+    state: 1,
+  }
 })
 app.use(router.routes())
 

@@ -43,6 +43,7 @@ const chain = ConversationalRetrievalQAChain.fromLLM(
   },
 )
 
+/* // for local dev
 const q1 = 'what authentication flow should be used for regular web app?'
 const q2 = 'what about the mobile app?'
 const histories = []
@@ -60,5 +61,13 @@ const res2 = await chain.call({
   question: q2,
   chat_history: [new HumanChatMessage(q1), new HumanChatMessage(res.text)],
 })
-
 console.log('2nd chat res: ', res2)
+*/
+
+export async function chat(question) {
+  const res = await chain.call({
+    question,
+    chat_history: [],
+  })
+  return res
+}
