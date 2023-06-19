@@ -12,7 +12,11 @@ app.use(
 
 const router = new Router()
 router.get('/', ctx => {
-  ctx.body = 'hello server'
+  ctx.body = 'hello server!!!!!'
+})
+
+router.post('/chat', ctx => {
+  const { message } = ctx.request.body
 })
 app.use(router.routes())
 

@@ -5,17 +5,22 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@pinecone-database/pinecone": "^0.1.6",
     "dotenv": "^16.3.0",
+    "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "koa-router": "^12.0.0",
     "langchain": "^0.0.95",
     "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
-    "koa-setup": "^1.0.4"
+    "koa-setup": "^1.0.4",
+    "nodemon": "^2.0.22"
   }
 }
