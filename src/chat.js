@@ -3,6 +3,11 @@ import { OpenAI } from 'langchain/llms/openai'
 import { PineconeClient } from '@pinecone-database/pinecone'
 import { PineconeStore } from 'langchain/vectorstores/pinecone'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
+import {
+  BaseChatMessage,
+  HumanChatMessage,
+  AIChatMessage,
+} from 'langchain/schema'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -21,17 +26,39 @@ await pineconeClient.init({
 })
 
 const pineconeIndex = pineconeClient.Index(process.env.PINECONE_INDEX)
-const pineconeStore = await PineconeStore.fromExistingIndex(new OpenAIEmbeddings(), {
-  pineconeIndex,
-  textKey: 'text',
-  namespace: 'my-langchain-ai',
-})
+const pineconeStore = await PineconeStore.fromExistingIndex(
+  new OpenAIEmbeddings(),
+  {
+    pineconeIndex,
+    textKey: 'text',
+    namespace: 'my-langchain-ai',
+  },
+)
 
-const chain = ConversationalRetrievalQAChain.fromLLM(model, pineconeStore.asRetriever())
+const chain = ConversationalRetrievalQAChain.fromLLM(
+  model,
+  pineconeStore.asRetriever(),
+  {
+    returnSourceDocuments: true,
+  },
+)
+
+const q1 = 'what authentication flow should be used for regular web app?'
+const q2 = 'what about the mobile app?'
+const histories = []
 
 const res = await chain.call({
-  question: 'what authentication flow should be used for regular web app?',
+  question: q1,
   chat_history: [],
 })
 
-console.log('chat res: ', res)
+histories.push(new HumanChatMessage(q1))
+
+console.log('1st chat res: ', res)
+
+const res2 = await chain.call({
+  question: q2,
+  chat_history: [new HumanChatMessage(q1), new HumanChatMessage(res.text)],
+})
+
+console.log('2nd chat res: ', res2)
