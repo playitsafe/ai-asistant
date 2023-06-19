@@ -14,5 +14,8 @@
     "dotenv": "^16.3.0",
     "langchain": "^0.0.95",
     "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "koa-setup": "^1.0.4"
   }
 }
